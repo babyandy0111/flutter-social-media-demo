@@ -3,12 +3,15 @@ import 'package:dcard/page/video/components/bottom_sheet.dart'
 import 'package:dcard/page/video/comment_bottom_sheet.dart';
 import 'package:dcard/page/video/components/video_user_info.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../model/video_model.dart';
 import '../../theme/video_page_theme.dart';
 import '../../utils/components/my_avatar.dart';
 import '../../utils/components/my_icon_button.dart';
+import 'camera_page.dart';
 
 class VideoPage extends StatefulWidget {
   const VideoPage({super.key});
@@ -25,6 +28,41 @@ class VideoPageViewState extends State<VideoPage> with WidgetsBindingObserver {
   late int currentIndex = 0;
   List<VideoPlayerController> playerList = [];
   List<Future> videoPlayListFuture = [];
+
+  Future<PermissionStatus> getPermissions() async {
+    PermissionStatus permissionStatus = PermissionStatus.granted;
+    Map<Permission, PermissionStatus> status = await [
+      Permission.camera,
+      // Permission.storage,
+      Permission.microphone
+    ].request();
+
+    List<PermissionStatus> statusList = [];
+    if (status[Permission.camera] != null) {
+      statusList.add(status[Permission.camera]!);
+    }
+    // if (status[Permission.storage] != null) {
+    //   statusList.add(status[Permission.storage]!);
+    // }
+    if (status[Permission.microphone] != null) {
+      statusList.add(status[Permission.microphone]!);
+    }
+    for (var element in statusList) {
+      if (element.isGranted) {
+        print("同意");
+      } else if (element.isPermanentlyDenied) {
+        print("拒絕且不再提醒");
+        permissionStatus = PermissionStatus.permanentlyDenied;
+      } else {
+        print("拒絕");
+        if (permissionStatus == PermissionStatus.granted) {
+          permissionStatus = PermissionStatus.denied;
+        }
+      }
+    }
+
+    return permissionStatus;
+  }
 
   @override
   void initState() {
@@ -157,6 +195,29 @@ class VideoPageViewState extends State<VideoPage> with WidgetsBindingObserver {
                         child: const MyIconButton(
                           icon: IconToText(Icons.share, size: SysSize.iconBig),
                           text: '346',
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          playerList[currentIndex].pause();
+                          getPermissions().then((value) {
+                            if (value.isGranted) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CameraPage()));
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: "權限取得失敗",
+                              );
+                            }
+                          });
+                        },
+                        child: const MyIconButton(
+                          icon: IconToText(Icons.add_circle_outline,
+                              size: SysSize.iconBig),
+                          text: '',
                         ),
                       ),
                       Container(

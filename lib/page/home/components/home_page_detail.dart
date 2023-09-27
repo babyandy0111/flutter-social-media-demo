@@ -9,8 +9,10 @@ import '../../../provider/search_text_provider.dart';
 import '../../board/board_page.dart';
 import '../../notification/notification_page.dart';
 import '../../video/video_page.dart';
+import '../post_article_page.dart';
 
-final searchTextProvider = ChangeNotifierProvider((ref) => SearchTextNotifier());
+final searchTextProvider =
+    ChangeNotifierProvider((ref) => SearchTextNotifier());
 
 class HomePageDetail extends StatefulWidget {
   final int currentPageIndex;
@@ -88,6 +90,19 @@ class _HomePageDetailState extends State<HomePageDetail>
       home: Scaffold(
         appBar: searchBar,
         body: page,
+        floatingActionButton: index != 3
+            ? FloatingActionButton(
+                backgroundColor: const Color(0xFF539DCE),
+                foregroundColor: Colors.white,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const PostArticlePage()));
+                },
+                child: const Icon(Icons.add),
+              )
+            : Container(),
       ),
     );
   }
