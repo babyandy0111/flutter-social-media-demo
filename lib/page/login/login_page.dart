@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -7,9 +8,6 @@ import '../../utils/components/login_signup.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
-
-  static String id = 'login_screen';
-
   @override
   State<LoginPage> createState() => LoginPageState();
 }
@@ -84,20 +82,23 @@ class LoginPageState extends State<LoginPage> {
                                 setState(() {
                                   _saving = false;
                                 });
+                                Fluttertoast.showToast(
+                                  msg: 'login success',
+                                );
                               }
                             } catch (e) {
-                              print(e);
+                              Fluttertoast.showToast(
+                                msg: e.toString(),
+                              );
                             }
                           },
                           questionPressed: () {
                             signUpAlert(
                               onPressed: () async {
-                                await FirebaseAuth.instance
-                                    .sendPasswordResetEmail(email: _email);
+                                await FirebaseAuth.instance.sendPasswordResetEmail(email: _email);
                               },
                               title: 'RESET YOUR PASSWORD',
-                              desc:
-                                  'Click on the button to reset your password',
+                              desc: 'Click on the button to reset your password',
                               btnText: 'Reset Now',
                               context: context,
                             ).show();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 import '../../theme/signup_login_theme.dart';
@@ -8,9 +9,6 @@ import '../login/login_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
-
-  static String id = 'signup_screen';
-
   @override
   SignUpPageState createState() => SignUpPageState();
 }
@@ -125,10 +123,14 @@ class SignUpPageState extends State<SignUpPage> {
                                     ).show();
                                   }
                                 } catch (e) {
-                                  print(e);
+                                  Fluttertoast.showToast(
+                                    msg: e.toString(),
+                                  );
                                 }
                               } else {
-                                print('xxxxxxxx');
+                                Fluttertoast.showToast(
+                                  msg: '密罵輸入不一樣',
+                                );
                               }
                             },
                             questionPressed: () async {
