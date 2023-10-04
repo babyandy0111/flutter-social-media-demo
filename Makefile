@@ -9,3 +9,7 @@ build-icon:
 
 open-xcode:
 	cd ios && open Runner.xcworkspace && cd ..
+
+## https://firebase.google.com/docs/flutter/setup?platform=ios&hl=zh-tw
+configure-firebaase:
+	flutterfire configure
