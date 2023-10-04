@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dcard/page/all_login_page.dart';
 import 'package:dcard/page/home/home_page.dart';
 import 'package:dcard/page/welcome/welcome_page.dart';
 import 'package:dcard/utils/provider_logger.dart';

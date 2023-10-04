@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
-import '../page/login/login_page.dart';
-import '../theme/signup_login_theme.dart';
-import '../utils/components/login_signup.dart';
+import '../../theme/signup_login_theme.dart';
+import '../../utils/components/login_signup.dart';
+import '../login/login_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -116,13 +115,11 @@ class SignUpPageState extends State<SignUpPage> {
                                       onPressed: () {
                                         setState(() {
                                           _saving = false;
-                                          Navigator.popAndPushNamed(
-                                              context, SignUpPage.id);
                                         });
                                         Navigator.push(context,
                                             MaterialPageRoute<void>(builder:
                                                 (BuildContext context) {
-                                          return const LoginScreen();
+                                          return const LoginPage();
                                         }));
                                       },
                                     ).show();
@@ -137,7 +134,7 @@ class SignUpPageState extends State<SignUpPage> {
                             questionPressed: () async {
                               Navigator.push(context, MaterialPageRoute<void>(
                                   builder: (BuildContext context) {
-                                return const LoginScreen();
+                                return const LoginPage();
                               }));
                             },
                           ),

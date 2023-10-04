@@ -5,16 +5,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../theme/signup_login_theme.dart';
 import '../../utils/components/login_signup.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   static String id = 'login_screen';
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginPage> createState() => LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginPageState extends State<LoginPage> {
   final _auth = FirebaseAuth.instance;
   late String _email;
   late String _password;
@@ -83,26 +83,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               if (context.mounted) {
                                 setState(() {
                                   _saving = false;
-                                  Navigator.popAndPushNamed(
-                                      context, LoginScreen.id);
                                 });
-                                // Navigator.pushNamed(context, WelcomeScreen.id);
                               }
                             } catch (e) {
-                              signUpAlert(
-                                context: context,
-                                onPressed: () {
-                                  setState(() {
-                                    _saving = false;
-                                  });
-                                  Navigator.popAndPushNamed(
-                                      context, LoginScreen.id);
-                                },
-                                title: 'WRONG PASSWORD OR EMAIL',
-                                desc:
-                                    'Confirm your email and password and try again',
-                                btnText: 'Try Now',
-                              ).show();
+                              print(e);
                             }
                           },
                           questionPressed: () {

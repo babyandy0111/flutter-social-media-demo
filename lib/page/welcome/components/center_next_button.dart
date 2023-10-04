@@ -1,4 +1,5 @@
 import 'package:animations/animations.dart';
+import 'package:dcard/page/login/login_page.dart';
 import 'package:flutter/material.dart';
 
 class CenterNextButton extends StatelessWidget {
@@ -134,29 +135,36 @@ class CenterNextButton extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: SlideTransition(
-              position: loginTextMoveAnimation,
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Already have an account? ',
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                    ),
+                position: loginTextMoveAnimation,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute<void>(
+                        builder: (BuildContext context) {
+                      return const LoginPage();
+                    }));
+                  },
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Already have an account? ',
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      Text(
+                        'Login',
+                        style: TextStyle(
+                          color: Color(0xff132137),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'Login',
-                    style: TextStyle(
-                      color: Color(0xff132137),
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                )),
           ),
         ],
       ),
