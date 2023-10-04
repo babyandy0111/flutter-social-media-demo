@@ -8,6 +8,8 @@ import 'package:dcard/page/welcome/components/top_back_skip_view.dart';
 import 'package:dcard/page/welcome/components/welcome_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../signup_page/signup_page.dart';
+
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -113,7 +115,7 @@ class WelcomePageState extends State<WelcomePage>
   void _signUpClick() {
     Navigator.push(context,
         MaterialPageRoute<void>(builder: (BuildContext context) {
-      return const HomePage();
+      return const SignUpPage();
     }));
   }
 }

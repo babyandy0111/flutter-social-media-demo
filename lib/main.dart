@@ -9,19 +9,23 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await dotenv.load(fileName: "assets/.env");
   await SpUtil.preInit();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(ProviderScope(
     observers: [ProviderLogger()],
     child: const App(),
   ));
 
-  Timer(const Duration(seconds: 5), () {
+  Timer(const Duration(seconds: 3), () {
     FlutterNativeSplash.remove();
   });
 }
@@ -45,7 +49,7 @@ class App extends StatelessWidget {
                 accentColor: const Color(0xFF084A76),
               ),
             ),
-            home: (isLogin == null) ? const HomePage() : const WelcomePage(),
+            home: (isLogin == null) ? const WelcomePage() : const HomePage(),
           );
         });
   }
