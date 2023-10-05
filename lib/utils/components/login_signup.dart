@@ -142,7 +142,7 @@ class CustomBottomScreen extends StatelessWidget {
               },
               child: Container(
                   padding: const EdgeInsets.only(top: 0),
-                  width: 90,
+                  width: 150,
                   child: Text(
                     question,
                     overflow: TextOverflow.ellipsis,
@@ -156,7 +156,7 @@ class CustomBottomScreen extends StatelessWidget {
             tag: heroTag,
             child: CustomButton(
               buttonText: textButton,
-              width: 150,
+              width: 100,
               onPressed: () {
                 buttonPressed();
               },

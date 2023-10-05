@@ -8,6 +8,8 @@ import 'package:dcard/page/welcome/components/top_back_skip_view.dart';
 import 'package:dcard/page/welcome/components/welcome_view.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/shared_preferences/sp.dart';
+
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -73,6 +75,7 @@ class WelcomePageState extends State<WelcomePage>
   void _onSkipClick() {
     _animationController?.animateTo(0.8,
         duration: const Duration(milliseconds: 1200));
+    SpUtil.getInstance().setData('isFirst', false);
   }
 
   void _onBackClick() {
@@ -111,6 +114,7 @@ class WelcomePageState extends State<WelcomePage>
   }
 
   void _signUpClick() {
+    SpUtil.getInstance().setData('isFirst', false);
     Navigator.push(context,
         MaterialPageRoute<void>(builder: (BuildContext context) {
       return const SignUpPage();

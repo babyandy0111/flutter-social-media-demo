@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dcard/page/all_login_page.dart';
 import 'package:dcard/page/home/home_page.dart';
+import 'package:dcard/page/login/login_page.dart';
 import 'package:dcard/page/welcome/welcome_page.dart';
 import 'package:dcard/utils/provider_logger.dart';
 import 'package:dcard/utils/shared_preferences/sp.dart';
@@ -33,10 +34,11 @@ void main() async {
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
-  static const isLogin = null;
 
   @override
   Widget build(BuildContext context) {
+    bool isLogin = SpUtil.getInstance().get('isLogin') ?? false;
+    bool isFirst = SpUtil.getInstance().get('isFirst') ?? true;
     return ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
@@ -50,7 +52,11 @@ class App extends StatelessWidget {
                 accentColor: const Color(0xFF084A76),
               ),
             ),
-            home: (isLogin == null) ? const WelcomePage() : const HomePage(),
+            home: (isLogin)
+                ? const HomePage()
+                : (isFirst)
+                    ? const WelcomePage()
+                    : const AllLoginPage(),
           );
         });
   }

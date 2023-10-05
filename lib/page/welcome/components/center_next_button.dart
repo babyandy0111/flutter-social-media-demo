@@ -105,7 +105,7 @@ class CenterNextButton extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Sign Up',
+                                    '快來進行註冊吧',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -147,7 +147,7 @@ class CenterNextButton extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Already have an account? ',
+                        '已經有帳號？ ',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 14,
@@ -155,7 +155,7 @@ class CenterNextButton extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Login',
+                        '登入',
                         style: TextStyle(
                           color: Color(0xff132137),
                           fontSize: 16,
