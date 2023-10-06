@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dcard/page/all_login_page.dart';
 import 'package:dcard/page/home/home_page.dart';
-import 'package:dcard/page/login/login_page.dart';
 import 'package:dcard/page/welcome/welcome_page.dart';
 import 'package:dcard/utils/provider_logger.dart';
 import 'package:dcard/utils/shared_preferences/sp.dart';
@@ -13,6 +12,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:device_preview/device_preview.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -22,12 +22,16 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(ProviderScope(
     observers: [ProviderLogger()],
-    child: const App(),
+    child: DevicePreview(
+      enabled: true,
+      tools: const [...DevicePreview.defaultTools],
+      builder: (BuildContext context) => const App(),
+    ),
   ));
-
-  Timer(const Duration(seconds: 3), () {
+  Timer(const Duration(seconds: 2), () {
     FlutterNativeSplash.remove();
   });
 }
@@ -40,7 +44,7 @@ class App extends StatelessWidget {
     bool isLogin = SpUtil.getInstance().get('isLogin') ?? false;
     bool isFirst = SpUtil.getInstance().get('isFirst') ?? true;
     return ScreenUtilInit(
-        designSize: const Size(360, 690),
+        designSize: const Size(360, 640),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (_, child) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../model/newsfeed.dart';
 import 'components/newsFeedCard.dart';
 
@@ -21,8 +22,6 @@ class RecommendFeed extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var size = MediaQuery.of(context).size;
-
     return SafeArea(
       child: Scaffold(
           resizeToAvoidBottomInset: false,
@@ -30,7 +29,7 @@ class RecommendFeed extends StatelessWidget {
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 10),
+              SizedBox(height: 10.h),
               Expanded(
                 child: ListView.builder(
                     shrinkWrap: true,
@@ -38,7 +37,7 @@ class RecommendFeed extends StatelessWidget {
                     itemBuilder: (context, index) {
                       var nf = newsfeed[index];
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 8).w,
                         child: NewsFeedCard(nf: nf, index: index),
                       );
                     }),
