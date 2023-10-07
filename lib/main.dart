@@ -13,6 +13,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'messaging_service.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -22,13 +25,15 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print("FCMToken $fcmToken");
   runApp(ProviderScope(
     observers: [ProviderLogger()],
     child: DevicePreview(
       enabled: true,
       tools: const [...DevicePreview.defaultTools],
-      builder: (BuildContext context) => const App(),
+      builder: (BuildContext context) => MyApp(),
     ),
   ));
   Timer(const Duration(seconds: 2), () {
@@ -36,13 +41,25 @@ void main() async {
   });
 }
 
-class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+class MyApp extends StatefulWidget {
+  @override
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  final messagingService = MessagingService();
+
+  @override
+  void initState() {
+    super.initState();
+    messagingService.init();
+  }
 
   @override
   Widget build(BuildContext context) {
     bool isLogin = SpUtil.getInstance().get('isLogin') ?? false;
     bool isFirst = SpUtil.getInstance().get('isFirst') ?? true;
+
     return ScreenUtilInit(
         designSize: const Size(360, 640),
         minTextAdapt: true,
