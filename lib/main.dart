@@ -31,7 +31,7 @@ void main() async {
   runApp(ProviderScope(
     observers: [ProviderLogger()],
     child: DevicePreview(
-      enabled: true,
+      enabled: false,
       tools: const [...DevicePreview.defaultTools],
       builder: (BuildContext context) => MyApp(),
     ),
