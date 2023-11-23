@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:dcard/page/all_login_page.dart';
 import 'package:dcard/page/home/home_page.dart';
-import 'package:dcard/page/welcome/welcome_page.dart';
 import 'package:dcard/utils/provider_logger.dart';
 import 'package:dcard/utils/shared_preferences/sp.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +11,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
 import 'messaging_service.dart';
 
 void main() async {
@@ -36,9 +32,6 @@ void main() async {
       builder: (BuildContext context) => MyApp(),
     ),
   ));
-  Timer(const Duration(seconds: 2), () {
-    FlutterNativeSplash.remove();
-  });
 }
 
 class MyApp extends StatefulWidget {
@@ -58,8 +51,7 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     bool isLogin = SpUtil.getInstance().get('isLogin') ?? false;
-    bool isFirst = SpUtil.getInstance().get('isFirst') ?? true;
-
+    FlutterNativeSplash.remove();
     return ScreenUtilInit(
         designSize: const Size(360, 640),
         minTextAdapt: true,
@@ -73,11 +65,7 @@ class MyAppState extends State<MyApp> {
                 accentColor: const Color(0xFF084A76),
               ),
             ),
-            home: (isLogin)
-                ? const HomePage()
-                : (isFirst)
-                    ? const WelcomePage()
-                    : const AllLoginPage(),
+            home: (isLogin) ? const HomePage() : const AllLoginPage(),
           );
         });
   }

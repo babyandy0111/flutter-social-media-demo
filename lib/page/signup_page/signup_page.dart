@@ -129,7 +129,7 @@ class SignUpPageState extends State<SignUpPage> {
                                 }
                               } else {
                                 Fluttertoast.showToast(
-                                  msg: '密罵輸入不一樣',
+                                  msg: '密碼輸入不一樣',
                                 );
                               }
                             },

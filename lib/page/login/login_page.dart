@@ -71,7 +71,7 @@ class LoginPageState extends State<LoginPage> {
                         CustomBottomScreen(
                           textButton: 'Login',
                           heroTag: 'login_btn',
-                          question: 'Forgot password?',
+                          question: 'Forgot?',
                           buttonPressed: () async {
                             FocusManager.instance.primaryFocus?.unfocus();
                             setState(() {

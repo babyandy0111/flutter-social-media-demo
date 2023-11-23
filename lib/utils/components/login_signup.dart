@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../theme/signup_login_theme.dart';
@@ -138,11 +139,31 @@ class CustomBottomScreen extends StatelessWidget {
             ),
             child: GestureDetector(
               onTap: () {
+                Navigator.pop(context);
+              },
+              child: Container(
+                  padding: const EdgeInsets.only(top: 0),
+                  width: 30.w,
+                  child: const Text(
+                    "back",
+                    overflow: TextOverflow.ellipsis,
+                  )),
+            ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 30,
+            ),
+            child: GestureDetector(
+              onTap: () {
                 questionPressed();
               },
               child: Container(
                   padding: const EdgeInsets.only(top: 0),
-                  width: 150,
+                  width: 50.w,
                   child: Text(
                     question,
                     overflow: TextOverflow.ellipsis,
@@ -156,7 +177,7 @@ class CustomBottomScreen extends StatelessWidget {
             tag: heroTag,
             child: CustomButton(
               buttonText: textButton,
-              width: 100,
+              width: 100.w,
               onPressed: () {
                 buttonPressed();
               },
